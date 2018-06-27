@@ -33,8 +33,8 @@
 #endif
 
 #include <pthread.h>
-
-#include <unistd.h>
+//
+//#include <unistd.h>
 
 #include "db_driver.h"
 #include "sb_list.h"
@@ -320,7 +320,7 @@ db_conn_t *db_connection_create(db_driver_t *drv)
       free(con);
       return NULL;
     }
-    usleep(10);
+//    usleep(10);
   }
 
   return con;
