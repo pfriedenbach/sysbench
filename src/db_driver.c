@@ -311,10 +311,13 @@ db_conn_t *db_connection_create(db_driver_t *drv)
 
   con->thread_id =  sb_tls_thread_id;
 
-  if (drv->ops.connect(con))
-  {
-    free(con);
-    return NULL;
+  int   attempts = 0;
+  while ( drv->ops.connect(con) ) {
+    attempts = attempts + 1;
+    if ( attempts > 100 ) {
+      free(con);
+      return NULL;
+    }
   }
 
   return con;
